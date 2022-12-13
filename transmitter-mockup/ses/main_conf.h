@@ -12,15 +12,19 @@
 #include "nrf_drv_timer.h"
 #include "nrf_uart.h"
 #include "uart.h"
+#include "channel_library.h"
 #include <stdbool.h>
 #include <stdint.h>
 
 /* --------------------- Definitions -------------------------- */
-#define CH1 12
-#define PIN_DEBUG 8
-
+enum {channel_1_ready = 0b00000001, 
+      channel_2_ready = 0b00000010,
+      channel_3_ready = 0b00000100,
+      channel_4_ready = 0b00001000};
 /* --------------------- User parameters -------------------------- */
 
+#define CH1 2
+#define PIN_DEBUG 8
 #define PWM_IN_FREQ 400 // Signal frequency [Hz]
 
 
@@ -28,17 +32,6 @@
 
 //// General ////
 float to_dc = PWM_IN_FREQ / 1e6 * 100; // Scaled to be used when the ton is expressed in us
-
-//// PWM ////
-const nrf_drv_timer_t TIMER_CH1 = NRF_DRV_TIMER_INSTANCE(0);
-
-typedef struct {
-  uint32_t t1, t2;
-  uint8_t dc;
-} channel_times_t; // Struct to store the signal times and duty cycle
-
-channel_times_t ch1_times;
-
 
 //// Transmission ////
 uint8_t tx_msg[30] = {0xC5, 0, 0xC6, '0', 'C', 'A', 'W', 'A','C', 'A', 'W', 'A', 'V', 'E', 0, 0}; // Buffer to send
@@ -62,4 +55,4 @@ uint8_t data_ready = 0b00000000; // Mask to indicate when data has to be send
 static void send_message(uint8 *msg);
 static void timer_ch1_event_handler(nrf_timer_event_t event_type, void *p_context);
 static void timer_reload_handler(nrf_timer_event_t event_type, void *p_context);
-static void ch1_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action);
+static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action);
