@@ -4,7 +4,7 @@ typedef struct channel{
   uint8_t pin_number;
   nrf_drv_timer_t timer_channel;
   uint32_t t1, t2;
-  uint8_t dc;
+  uint8_t dc, bitmask;
 } channel_t; 
 
 
@@ -18,7 +18,8 @@ channel_t * channel_init_void(){
   return channel;
 }
 
-channel_t * channel_init_default(uint8_t pin_number, 
+channel_t * channel_init_default(uint8_t pin_number,
+                                 uint8_t bitmask,
                                   const nrf_drv_timer_t timer_channel,
                                   nrf_drv_gpiote_evt_handler_t gpiote_channel_handler){
   uint32_t err_code = NRF_SUCCESS;
@@ -29,6 +30,7 @@ channel_t * channel_init_default(uint8_t pin_number,
   }
 
   channel->pin_number = pin_number;
+  channel->bitmask = bitmask;
   channel->timer_channel = timer_channel;
   nrf_drv_timer_config_t timer_config = NRF_DRV_TIMER_DEFAULT_CONFIG;
   timer_config.frequency = NRF_TIMER_FREQ_1MHz;
@@ -45,9 +47,10 @@ channel_t * channel_init_default(uint8_t pin_number,
 
   // GPIOTE Configuration
   nrf_drv_gpiote_init();
-  nrf_drv_gpiote_in_config_t ch1_gpiote_config = GPIOTE_CONFIG_IN_SENSE_TOGGLE(false);
-  ch1_gpiote_config.pull = NRF_GPIO_PIN_PULLUP;
-  nrf_drv_gpiote_in_init(channel->pin_number, &ch1_gpiote_config, gpiote_channel_handler);
+  nrf_drv_gpiote_in_config_t ch_gpiote_config = GPIOTE_CONFIG_IN_SENSE_TOGGLE(false);
+//  ch_gpiote_config.pull = NRF_GPIO_PIN_PULLUP;
+  nrf_drv_gpiote_in_init(channel->pin_number, &ch_gpiote_config, gpiote_channel_handler);
+  nrf_drv_gpiote_in_event_enable(channel->pin_number, true);
 
   // PPI Connection
   nrf_ppi_channel_t ppi_ch;
@@ -80,6 +83,9 @@ uint8_t channel_get_dc(channel_t * channel){
 }
 uint8_t channel_get_pin(channel_t * channel){
   return channel->pin_number;
+}
+uint8_t channel_get_mask(channel_t * channel){
+  return channel->bitmask;
 }
 nrf_drv_timer_t * channel_get_timer_channel(channel_t *channel){
   return &channel->timer_channel;

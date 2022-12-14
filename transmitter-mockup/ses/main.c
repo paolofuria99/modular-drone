@@ -52,19 +52,20 @@
  * @brief Function for main application entry.
  */
 
-const nrf_drv_timer_t TIMER_CH1 = NRF_DRV_TIMER_INSTANCE(0);
-const nrf_drv_timer_t TIMER_CH2 = NRF_DRV_TIMER_INSTANCE(1);
-
-channel_t *ch;
-channel_t *ch1;
-channel_t *ch2;
-
+// Srt this to the right amount of channel you want to read
 int main(void) {
-   ch = channel_init_void();
-   ch1 = channel_init_default(CH1, TIMER_CH1, gpiote_handler);
-   ch2 = channel_init_default(PIN_DEBUG, TIMER_CH2, gpiote_handler);
-  
+  ch = channel_init_void();
+  ch0 = channel_init_default(CH0_PIN, channel_0_ready, TIMER_CH0, gpiote_handler);
+  ch1 = channel_init_default(CH1_PIN, channel_1_ready, TIMER_CH1, gpiote_handler);
+  ch2 = channel_init_default(CH2_PIN, channel_2_ready, TIMER_CH2, gpiote_handler);
+  ch3 = channel_init_default(CH3_PIN, channel_3_ready, TIMER_CH3, gpiote_handler);
+
+  nrf_gpio_cfg_output(PIN_DEBUG);
+
+  channel_t *all_channels[] = {ch0, ch1, ch2, ch3};
+
   uint32_t err_code = NRF_SUCCESS;
+  float dc = 0;
 
   // ---------------- UART INIT ---------------------------------------- //
   boUART_Init();
@@ -90,31 +91,25 @@ int main(void) {
   dwt_configure(&dwt_config);
 
   // -------------------- End DWM configuration ----------------------------- //
-
   printf("DWM configured\r\n");
 
-  //Configure all leds on board.
-  //bsp_board_leds_init();
-
-  // TIMER Configuration
-  
-  // You have to check that the timer reload does not occur during a measurement
-
-  boUART_Init();
-  nrf_drv_gpiote_in_event_enable(CH1, true);
-
-  nrf_gpio_cfg_output(PIN_DEBUG);
-
   printf("Running main loop \r\n");
+  uint32_t cnt = 0;
+  uint8_t cnt_print = 10;
   while (1) {
-    if (data_ready == 0b00000001) {
-      channel_set_dc(ch1,  100 - (channel_get_t1(ch1) - channel_get_t2(ch1)) * to_dc);
-      tx_msg[1] = channel_get_dc(ch1);
-      data_ready = data_ready & 0b11111110; // Reset the last bit
-      send_message(tx_msg);                 // Send data and wait
-      nrf_gpio_pin_toggle(PIN_DEBUG);
-      printf("Duty cycle is: %d[%%] \r\n",  channel_get_dc(ch1));
-      printf("Ton duration: %d[ms] \r\n",  (channel_get_t1(ch1) - channel_get_t2(ch1))/1000);
+    if (data_ready == BITMASK_WHEN_READY) {
+      for (int j = 1; j < NUMBER_OF_CHANNELS_ENABLED * 2; j += 2) {
+        dc = channel_get_dc(all_channels[(j - 1) / 2]);
+        tx_msg[j] = dc;
+      }
+      send_message(tx_msg);  
+      data_ready = data_ready & 0x00; // Reset the last bit
+                     // Send data and wait
+//      if (cnt % cnt_print == 0) {
+//        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+//      }
+//      cnt ++;
+     print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
     }
   }
 }
@@ -136,28 +131,30 @@ static void send_message(uint8 *msg) {
   dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
 }
 
-static void timer_ch1_event_handler(nrf_timer_event_t event_type, void *p_context) {
-  printf("Timer reload Interrupt\r\n");
-}
-
-static void timer_reload_handler(nrf_timer_event_t event_type, void *p_context) {
-  printf("Timer reload Interrupt\r\n");
-}
-
-
 static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action) {
-  if (action == NRF_GPIOTE_POLARITY_TOGGLE) {
-    switch (pin){
-    case CH1:
+  nrf_gpio_pin_clear(PIN_DEBUG);
+  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN )) {
+    switch (pin) {
+    case CH0_PIN:
+      ch = ch0;
+      break;
+    case CH1_PIN:
       ch = ch1;
       break;
-    case PIN_DEBUG:
+    case CH2_PIN:
       ch = ch2;
       break;
+    case CH3_PIN:
+      ch = ch3;
+      break;
+    default:
+      printf("Wrong Channel\r\n");
+      exit(EXIT_FAILURE);
     }
     if (nrf_gpio_pin_read(channel_get_pin(ch))) {
       channel_set_t1(ch, nrf_drv_timer_capture_get(channel_get_timer_channel(ch), 0));
-      data_ready = data_ready | channel_1_ready;
+      data_ready = data_ready | channel_get_mask(ch);
+      channel_set_dc(ch, (uint8_t)(100 - (channel_get_t1(ch) - channel_get_t2(ch)) *to_dc));
 
       //      printf("Interrupt Low to High -- %d\r\n", ch1_times.t2);
 
@@ -166,4 +163,16 @@ static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t actio
       //      printf("Interrupt High to Low -- %d\r\n", ch1_times.t1);
     }
   }
+  nrf_gpio_pin_set(PIN_DEBUG);
 }
+
+static void print_msg(uint8 *msg, int n) {
+  printf("Message:\t[");
+  for (int i = 0; i < n; i++) {
+    printf(" %d ", msg[i]);
+  }
+  printf("]\r\n");
+}
+
+
+//    dc = (100 - (channel_get_t1(ch) - channel_get_t2(ch)) * PWM_IN_FREQ / 1e6 * 100);
