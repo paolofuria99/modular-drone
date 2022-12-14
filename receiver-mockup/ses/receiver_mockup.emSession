@@ -61,11 +61,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="25" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="84" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="279" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm/nrf_drv_pwm.c" selected="0" top="254" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="124" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm/nrf_drv_pwm.h" selected="0" top="109" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="266" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/hal/nrf_pwm.h" selected="0" top="245" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="395" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/toolchain/cmsis/include/cmsis_gcc.h" selected="0" top="374" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="60" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="50" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

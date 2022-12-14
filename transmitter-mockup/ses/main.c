@@ -102,38 +102,37 @@ int main(void) {
         dc = channel_get_dc(all_channels[(j - 1) / 2]);
         tx_msg[j] = dc;
       }
-      send_message(tx_msg);  
+      /* Write frame data to DW1000 and prepare transmission. See NOTE 4 below.*/
+      dwt_writetxdata(sizeof(tx_msg), tx_msg, 0); /* Zero offset in TX buffer. */
+      dwt_writetxfctrl(sizeof(tx_msg), 0, 0);     /* Zero offset in TX buffer, no ranging. */
+
+      dwt_starttx(DWT_START_TX_IMMEDIATE);
+
+      /* Poll DW1000 until TX frame sent event set. See NOTE 5 below.
+         * STATUS register is 5 bytes long but, as the event we are looking at is in the first byte of the register, we can use this simplest API
+         * function to access it.*/
+      while (!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS)) {
+      };
+      /* Clear TX frame sent event. */
+      dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
       data_ready = data_ready & 0x00; // Reset the last bit
-                     // Send data and wait
-//      if (cnt % cnt_print == 0) {
-//        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
-//      }
-//      cnt ++;
-     print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+                                      // Send data and wait
+                                      //      if (cnt % cnt_print == 0) {
+                                      //        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+                                      //      }
+                                      //      cnt ++;
+      print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
     }
   }
 }
 
 // Function definition
-static void send_message(uint8 *msg) {
-  /* Write frame data to DW1000 and prepare transmission. See NOTE 4 below.*/
-  dwt_writetxdata(sizeof(msg), msg, 0); /* Zero offset in TX buffer. */
-  dwt_writetxfctrl(sizeof(msg), 0, 0);  /* Zero offset in TX buffer, no ranging. */
-
-  dwt_starttx(DWT_START_TX_IMMEDIATE);
-
-  /* Poll DW1000 until TX frame sent event set. See NOTE 5 below.
-         * STATUS register is 5 bytes long but, as the event we are looking at is in the first byte of the register, we can use this simplest API
-         * function to access it.*/
-  while (!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS)) {
-  };
-  /* Clear TX frame sent event. */
-  dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
+static void send_message(uint8 msg) {
 }
 
 static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action) {
   nrf_gpio_pin_clear(PIN_DEBUG);
-  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN )) {
+  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN | pin ==CH1_PIN | pin ==CH2_PIN)) {
     switch (pin) {
     case CH0_PIN:
       ch = ch0;
@@ -154,7 +153,7 @@ static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t actio
     if (nrf_gpio_pin_read(channel_get_pin(ch))) {
       channel_set_t1(ch, nrf_drv_timer_capture_get(channel_get_timer_channel(ch), 0));
       data_ready = data_ready | channel_get_mask(ch);
-      channel_set_dc(ch, (uint8_t)(100 - (channel_get_t1(ch) - channel_get_t2(ch)) *to_dc));
+      channel_set_dc(ch, (uint8_t)(100 - (channel_get_t1(ch) - channel_get_t2(ch)) * to_dc));
 
       //      printf("Interrupt Low to High -- %d\r\n", ch1_times.t2);
 
@@ -173,6 +172,5 @@ static void print_msg(uint8 *msg, int n) {
   }
   printf("]\r\n");
 }
-
 
 //    dc = (100 - (channel_get_t1(ch) - channel_get_t2(ch)) * PWM_IN_FREQ / 1e6 * 100);

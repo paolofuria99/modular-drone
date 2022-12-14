@@ -58,8 +58,8 @@ nrf_pwm_sequence_t const seq =
 #define RECEIVER_ADDR 0xC5
 // Define the IO
 #define FRAME_LEN_MAX 127
-#define CH 12
-#define PIN_DEBUG 8
+#define CH 8
+#define PIN_DEBUG 12
 
 // Static declaration
 static void print_msg(uint8 *msg, int n);
@@ -171,8 +171,9 @@ int main(void) {
       }
 
       if (new_data == 1) {
-        print_msg(&rx_buffer, frame_len);
-        seq_values->channel_0 = (100 - rx_buffer[1]) * 2500 / 100;
+      printf("%d\r\n", rx_buffer[3]);
+//        print_msg(&rx_buffer, 6);
+        seq_values->channel_0 = (100 - rx_buffer[3]) * 2500 / 100;
         nrf_gpio_pin_toggle(PIN_DEBUG);
       }
 

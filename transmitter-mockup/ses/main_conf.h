@@ -42,7 +42,7 @@ enum {mask_ready_1_channel = 0b00000001,
 #define CH2_PIN 13
 #define CH3_PIN 15
 #define PIN_DEBUG 8
-#define PWM_IN_FREQ 10 // Signal frequency [Hz]
+#define PWM_IN_FREQ 400 // Signal frequency [Hz]
 
 
 
@@ -82,7 +82,7 @@ uint8_t data_ready = 0b00000000; // Mask to indicate when data has to be send
 
 
 /* --------------------- Functions -------------------------- */
-static void send_message(uint8 *msg);
+static void send_message(uint8 msg);
 static void print_msg(uint8 *msg, int n);
 static void timer_ch1_event_handler(nrf_timer_event_t event_type, void *p_context);
 static void timer_reload_handler(nrf_timer_event_t event_type, void *p_context);
@@ -91,4 +91,4 @@ static channel_t * channel_array_slice(channel_t * array, uint8_t i);
 
 
 /* ------------------------ Macros ------------------------------ */
-#define BITMASK_WHEN_READY mask_ready_1_channel
+#define BITMASK_WHEN_READY mask_ready_3_channel
