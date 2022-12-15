@@ -1,15 +1,3 @@
-/* Copyright (c) 2015 Nordic Semiconductor. All Rights Reserved.
- *
- * The information contained herein is property of Nordic Semiconductor ASA.
- * Terms and conditions of usage are described in detail in NORDIC
- * SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
- *
- * Licensees are granted free, non-transferable use of the information. NO
- * WARRANTY of ANY KIND is provided. This heading must NOT be removed from
- * the file.
- *
- */
-
 #include "app_error.h"
 #include "app_pwm.h"
 #include "bsp.h"
@@ -46,7 +34,7 @@ static dwt_config_t config = {
 
 static nrf_drv_pwm_t m_pwm0 = NRF_DRV_PWM_INSTANCE(0);
 
-// Declare variables holding PWM sequence values. In this example only one channel is used
+// Declare variables holding PWM sequence values. Only one channel is used
 nrf_pwm_values_individual_t seq_values[] = {0, 0, 0, 0};
 nrf_pwm_sequence_t const seq =
     {
@@ -58,8 +46,8 @@ nrf_pwm_sequence_t const seq =
 #define RECEIVER_ADDR 0xC5
 // Define the IO
 #define FRAME_LEN_MAX 127
-#define CH 8
-#define PIN_DEBUG 12
+#define CH 12
+#define PIN_DEBUG 8
 
 // Static declaration
 static void print_msg(uint8 *msg, int n);
@@ -109,13 +97,12 @@ int main(void) {
 
   /* Configure DW1000. */
   dwt_configure(&config);
-  //  dwt_setrxtimeout(65000); // Maximum value timeout with DW1000 is 65ms
 
   //-------------dw1000  ini------end---------------------------
   // IF WE GET HERE THEN THE LEDS WILL BLINK
 
-  // No RTOS task here so just call the main loop here.
-  // Loop forever responding to ranging requests.
+  uint32_t cnt = 0;
+  uint32_t cnt_print = 40;
 
   nrf_gpio_cfg_output(CH);
   nrf_gpio_cfg_output(PIN_DEBUG);
@@ -131,8 +118,9 @@ int main(void) {
   config.top_value = 2500;
   nrf_drv_pwm_init(&m_pwm0, &config, NULL);
 
-  seq_values->channel_0 = 1250;
+  seq_values->channel_0 = 2500 / 2;
   nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);
+
 
   // Wait indefinitely
   // Start clock for accurate frequencies
@@ -146,12 +134,10 @@ int main(void) {
         rx_buffer[i] = 0;
       }
 
-      /* Activate reception immediately. See NOTE 3 below. */
+      /* Activate reception immediately. */
       dwt_rxenable(DWT_START_RX_IMMEDIATE);
 
-      /* Poll until a frame is properly received or an error/timeout occurs. See NOTE 4 below.
-         * STATUS register is 5 bytes long but, as the event we are looking at is in the first byte of the register, we can use this simplest API
-         * function to access it. */
+/* Poll until a frame is properly received or an error/timeout occurs. */
       while (!((status_reg = dwt_read32bitreg(SYS_STATUS_ID)) & (SYS_STATUS_RXFCG | SYS_STATUS_ALL_RX_ERR))) {
       };
 
@@ -171,10 +157,21 @@ int main(void) {
       }
 
       if (new_data == 1) {
-      printf("%d\r\n", rx_buffer[3]);
-//        print_msg(&rx_buffer, 6);
-        seq_values->channel_0 = (100 - rx_buffer[3]) * 2500 / 100;
-        nrf_gpio_pin_toggle(PIN_DEBUG);
+ //       if(cnt%cnt_print ==0){
+ //         print_msg(&rx_buffer, frame_len);
+ //         }
+ //        cnt++;
+        for (int i = 0; i < FRAME_LEN_MAX; i++)
+        {
+          if (rx_buffer[i] == RECEIVER_ADDR)
+          {
+            seq_values->channel_0 = (100 - rx_buffer[i+1]) * 2500 / 100;
+            printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i+1]);
+            nrf_gpio_pin_toggle(PIN_DEBUG);
+            break;
+          }
+          
+        }
       }
 
       new_data = 0;
@@ -193,24 +190,3 @@ static void print_msg(uint8 *msg, int n) {
   }
   printf("]\r\n");
 }
-
-/*****************************************************************************************************************************************************
- * NOTES:
- *
- * 1. The single-sided two-way ranging scheme implemented here has to be considered carefully as the accuracy of the distance measured is highly
- *    sensitive to the clock offset error between the devices and the length of the response delay between frames. To achieve the best possible
- *    accuracy, this response delay must be kept as low as possible. In order to do so, 6.8 Mbps data rate is used in this example and the response
- *    delay between frames is defined as low as possible. The user is referred to User Manual for more details about the single-sided two-way ranging
- *    process.  NB:SEE ALSO NOTE 11.
- * 2. The sum of the values is the TX to RX antenna delay, this should be experimentally determined by a calibration process. Here we use a hard coded
- *    value (expected to be a little low so a positive error will be seen on the resultant distance estimate. For a real production application, each
- *    device should have its own antenna delay properly calibrated to get good precision when performing range measurements.
- * 3. This timeout is for complete reception of a frame, i.e. timeout duration must take into account the length of the expected frame. Here the value
- *    is arbitrary but chosen large enough to make sure that there is enough time to receive the complete response frame sent by the responder at the
- *    6.8M data rate used (around 200 s).
- * 4. In a real application, for optimum performance within regulatory limits, it may be necessary to set TX pulse bandwidth and TX power, (using
- *    the dwt_configuretxrf API call) to per device calibrated values saved in the target system or the DW1000 OTP memory.
- * 5. The user is referred to DecaRanging ARM application (distributed with EVK1000 product) for additional practical example of usage, and to the
- *     DW1000 API Guide for more details on the DW1000 driver functions.
- *
- ****************************************************************************************************************************************************/

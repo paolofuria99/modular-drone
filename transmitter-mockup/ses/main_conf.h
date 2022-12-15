@@ -32,10 +32,10 @@ enum {mask_ready_1_channel = 0b00000001,
 /* --------------------- User parameters -------------------------- */
 
 #define NUMBER_OF_CHANNELS_ENABLED 3
-#define ADDR_CH0 0xC0
-#define ADDR_CH1 0xC1
-#define ADDR_CH2 0xC2
-#define ADDR_CH3 0xC3
+#define ADDR_CH0 0xC5
+#define ADDR_CH1 0xC6
+#define ADDR_CH2 0xC7
+#define ADDR_CH3 0xC8
 
 #define CH0_PIN 12
 #define CH1_PIN 27

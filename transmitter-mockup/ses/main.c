@@ -95,7 +95,7 @@ int main(void) {
 
   printf("Running main loop \r\n");
   uint32_t cnt = 0;
-  uint8_t cnt_print = 10;
+  uint8_t cnt_print = 40;
   while (1) {
     if (data_ready == BITMASK_WHEN_READY) {
       for (int j = 1; j < NUMBER_OF_CHANNELS_ENABLED * 2; j += 2) {
@@ -121,7 +121,10 @@ int main(void) {
                                       //        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
                                       //      }
                                       //      cnt ++;
-      print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+      if(cnt%cnt_print == 0){
+        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+        }
+      cnt ++;
     }
   }
 }
