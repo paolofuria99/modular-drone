@@ -19,6 +19,8 @@
 
 //-----------------dw1000----------------------------
 
+uint8_t wait_reception();
+
 static dwt_config_t config = {
     5,               /* Channel number. */
     DWT_PRF_64M,     /* Pulse repetition frequency. */
@@ -43,11 +45,12 @@ nrf_pwm_sequence_t const seq =
         .repeats = 0,
         .end_delay = 0};
 
+
 #define RECEIVER_ADDR 0xC5
 // Define the IO
 #define FRAME_LEN_MAX 127
-#define CH 12
-#define PIN_DEBUG 8
+#define CH 8
+#define PIN_DEBUG 27
 
 // Static declaration
 static void print_msg(uint8 *msg, int n);
@@ -55,11 +58,10 @@ static void print_msg(uint8 *msg, int n);
 // Global variables
 static volatile bool ready_flag;
 int new_data = 0;
-static uint8 rx_buffer[FRAME_LEN_MAX];
 /* Hold copy of status register state here for reference so that it can be examined at a debug breakpoint. */
 static uint32 status_reg = 0;
 float PWM_IN_FREQ = 400;
-
+static uint8 rx_buffer[FRAME_LEN_MAX];
 /* Hold copy of frame length of frame received (if good) so that it can be examined at a debug breakpoint. */
 static uint16 frame_len = 0;
 
@@ -109,6 +111,14 @@ int main(void) {
   uint32_t T = 1 / PWM_IN_FREQ * 1e6; // Scaled to be used when the ton is expressed in us
 
   // Set up the PWM peripheral and sequence
+  // Start clock for accurate frequencies
+  NRF_CLOCK->TASKS_HFCLKSTART = 1;
+  // Wait for clock to start
+  while (NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
+
+  while (rx_buffer[0] != 0xff) {
+    wait_reception();
+  }
   nrf_drv_pwm_config_t config = NRF_DRV_PWM_DEFAULT_CONFIG;
   config.output_pins[0] = CH;
   config.base_clock = NRF_PWM_CLK_1MHz;
@@ -117,66 +127,58 @@ int main(void) {
   config.step_mode = NRF_PWM_STEP_AUTO,
   config.top_value = 2500;
   nrf_drv_pwm_init(&m_pwm0, &config, NULL);
-
-  seq_values->channel_0 = 2500 / 2;
+  //  seq_values->channel_0 = 2500 / 2;
   nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);
-
+  seq_values->channel_0 = 1250;
+  nrf_gpio_pin_set(PIN_DEBUG);
+  //    printf("Configured");
 
   // Wait indefinitely
-  // Start clock for accurate frequencies
-  NRF_CLOCK->TASKS_HFCLKSTART = 1;
-  // Wait for clock to start
-  while (NRF_CLOCK->EVENTS_HFCLKSTARTED == 0)
 
-    while (1) {
-
+  while (1) {
+   wait_reception();
       for (int i = 0; i < FRAME_LEN_MAX; i++) {
-        rx_buffer[i] = 0;
-      }
-
-      /* Activate reception immediately. */
-      dwt_rxenable(DWT_START_RX_IMMEDIATE);
-
-/* Poll until a frame is properly received or an error/timeout occurs. */
-      while (!((status_reg = dwt_read32bitreg(SYS_STATUS_ID)) & (SYS_STATUS_RXFCG | SYS_STATUS_ALL_RX_ERR))) {
-      };
-
-      if (status_reg & SYS_STATUS_RXFCG) {
-        /* A frame has been received, copy it to our local buffer. */
-        frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFL_MASK_1023;
-        if (frame_len <= FRAME_LEN_MAX) {
-          dwt_readrxdata(rx_buffer, frame_len, 0);
-          new_data = 1;
-        }
-
-        /* Clear good RX frame event in the DW1000 status register. */
-        dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_RXFCG);
-      } else {
-        /* Clear RX error events in the DW1000 status register. */
-        dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_ALL_RX_ERR);
-      }
-
-      if (new_data == 1) {
- //       if(cnt%cnt_print ==0){
- //         print_msg(&rx_buffer, frame_len);
- //         }
- //        cnt++;
-        for (int i = 0; i < FRAME_LEN_MAX; i++)
-        {
-          if (rx_buffer[i] == RECEIVER_ADDR)
-          {
-            seq_values->channel_0 = (100 - rx_buffer[i+1]) * 2500 / 100;
-            printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i+1]);
-            nrf_gpio_pin_toggle(PIN_DEBUG);
-            break;
-          }
-          
+        if (rx_buffer[i] == RECEIVER_ADDR) {
+          seq_values->channel_0 = (100 - rx_buffer[i + 1]) * 2500 / 100;
+          printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i + 1]);
+          //          nrf_gpio_pin_toggle(PIN_DEBUG);
+          break;
         }
       }
-
-      new_data = 0;
     }
+
 }
+
+
+uint8_t wait_reception(){
+    
+    for (int i = 0; i < FRAME_LEN_MAX; i++) {
+      rx_buffer[i] = 0;
+    }
+    /* Activate reception immediately. */
+    dwt_rxenable(DWT_START_RX_IMMEDIATE);
+//    nrf_gpio_pin_clear(PIN_DEBUG);
+    /* Poll until a frame is properly received or an error/timeout occurs. */
+    while (!((status_reg = dwt_read32bitreg(SYS_STATUS_ID)) & (SYS_STATUS_RXFCG | SYS_STATUS_ALL_RX_ERR))) {
+    };
+
+    if (status_reg & SYS_STATUS_RXFCG) {
+      /* A frame has been received, copy it to our local buffer. */
+      frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFL_MASK_1023;
+      if (frame_len <= FRAME_LEN_MAX) {
+        dwt_readrxdata(rx_buffer, frame_len, 0);
+      }
+
+      /* Clear good RX frame event in the DW1000 status register. */
+      dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_RXFCG);
+    } else {
+      /* Clear RX error events in the DW1000 status register. */
+      dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_ALL_RX_ERR);
+    }
+
+    return 0;
+}
+
 
 void pwm_ready_callback(uint32_t pwm_id) // PWM callback function
 {

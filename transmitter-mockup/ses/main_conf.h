@@ -31,7 +31,7 @@ enum {mask_ready_1_channel = 0b00000001,
 
 /* --------------------- User parameters -------------------------- */
 
-#define NUMBER_OF_CHANNELS_ENABLED 3
+#define NUMBER_OF_CHANNELS_ENABLED 4
 #define ADDR_CH0 0xC5
 #define ADDR_CH1 0xC6
 #define ADDR_CH2 0xC7
@@ -44,6 +44,8 @@ enum {mask_ready_1_channel = 0b00000001,
 #define PIN_DEBUG 8
 #define PWM_IN_FREQ 400 // Signal frequency [Hz]
 
+#define tx_conf_n 30
+#define tx_msg_n 30
 
 
 /* --------------------- Global variables -------------------------- */
@@ -51,6 +53,7 @@ const nrf_drv_timer_t TIMER_CH0 = NRF_DRV_TIMER_INSTANCE(0);
 const nrf_drv_timer_t TIMER_CH1 = NRF_DRV_TIMER_INSTANCE(1);
 const nrf_drv_timer_t TIMER_CH2 = NRF_DRV_TIMER_INSTANCE(2);
 const nrf_drv_timer_t TIMER_CH3 = NRF_DRV_TIMER_INSTANCE(3);
+const nrf_drv_timer_t TIMER_CH4 = NRF_DRV_TIMER_INSTANCE(4);
 
 channel_t *ch;
 channel_t *ch0;
@@ -63,7 +66,7 @@ channel_t *ch3;
 float to_dc = PWM_IN_FREQ / 1e6 * 100; // Scaled to be used when the ton is expressed in us
 
 //// Transmission ////
-uint8_t tx_msg[] = {ADDR_CH0, 0, ADDR_CH1, 0, ADDR_CH2, 0, ADDR_CH3, 0, 0, 0}; // Buffer to send
+uint8_t tx_msg[tx_msg_n] = {ADDR_CH0, 0, ADDR_CH1, 0, ADDR_CH2, 0, ADDR_CH3, 0, 0, 0}; // Buffer to send
 
 static dwt_config_t dwt_config = {
     5,               /* Channel number. */
@@ -82,13 +85,14 @@ uint8_t data_ready = 0b00000000; // Mask to indicate when data has to be send
 
 
 /* --------------------- Functions -------------------------- */
-static void send_message(uint8 msg);
+static void send_message(uint8_t * msg, uint8_t n);
 static void print_msg(uint8 *msg, int n);
 static void timer_ch1_event_handler(nrf_timer_event_t event_type, void *p_context);
 static void timer_reload_handler(nrf_timer_event_t event_type, void *p_context);
+static void empty_timer_callback(nrf_timer_event_t event_type, void *p_context);
 static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action);
 static channel_t * channel_array_slice(channel_t * array, uint8_t i);
 
 
 /* ------------------------ Macros ------------------------------ */
-#define BITMASK_WHEN_READY mask_ready_3_channel
+#define BITMASK_WHEN_READY mask_ready_4_channel

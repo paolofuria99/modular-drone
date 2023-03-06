@@ -54,16 +54,26 @@
 
 // Srt this to the right amount of channel you want to read
 int main(void) {
+  nrf_gpio_cfg_output(PIN_DEBUG);
+
   ch = channel_init_void();
   ch0 = channel_init_default(CH0_PIN, channel_0_ready, TIMER_CH0, gpiote_handler);
   ch1 = channel_init_default(CH1_PIN, channel_1_ready, TIMER_CH1, gpiote_handler);
   ch2 = channel_init_default(CH2_PIN, channel_2_ready, TIMER_CH2, gpiote_handler);
   ch3 = channel_init_default(CH3_PIN, channel_3_ready, TIMER_CH3, gpiote_handler);
 
-  nrf_gpio_cfg_output(PIN_DEBUG);
+  nrf_drv_timer_config_t timer_config = NRF_DRV_TIMER_DEFAULT_CONFIG;
+  timer_config.frequency = NRF_TIMER_FREQ_1MHz;
+
+  nrf_drv_timer_init(&TIMER_CH4, &timer_config, empty_timer_callback);
+  nrf_drv_timer_extended_compare(&TIMER_CH4,
+                                  NRF_TIMER_CC_CHANNEL0, 
+                                  UINT32_MAX,
+                                  NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, 
+                                  true); // Configure to reload after uint32 max ticks
+  nrf_drv_timer_enable(&TIMER_CH4);
 
   channel_t *all_channels[] = {ch0, ch1, ch2, ch3};
-
   uint32_t err_code = NRF_SUCCESS;
   float dc = 0;
 
@@ -91,6 +101,17 @@ int main(void) {
   dwt_configure(&dwt_config);
 
   // -------------------- End DWM configuration ----------------------------- //
+
+  // Send configuration signal
+  nrf_delay_ms(3000);
+  uint8_t tx_conf[tx_conf_n] = {0xff, 0xc5, 0x66, 0xa2, 0xb5, 0, 0, 0};
+  
+
+  send_message(tx_conf, tx_conf_n);
+ 
+  nrf_delay_ms(3000);
+  printf("Sent configuration message");
+
   printf("DWM configured\r\n");
 
   printf("Running main loop \r\n");
@@ -102,19 +123,8 @@ int main(void) {
         dc = channel_get_dc(all_channels[(j - 1) / 2]);
         tx_msg[j] = dc;
       }
-      /* Write frame data to DW1000 and prepare transmission. See NOTE 4 below.*/
-      dwt_writetxdata(sizeof(tx_msg), tx_msg, 0); /* Zero offset in TX buffer. */
-      dwt_writetxfctrl(sizeof(tx_msg), 0, 0);     /* Zero offset in TX buffer, no ranging. */
+      send_message(tx_msg, tx_msg_n);
 
-      dwt_starttx(DWT_START_TX_IMMEDIATE);
-
-      /* Poll DW1000 until TX frame sent event set. See NOTE 5 below.
-         * STATUS register is 5 bytes long but, as the event we are looking at is in the first byte of the register, we can use this simplest API
-         * function to access it.*/
-      while (!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS)) {
-      };
-      /* Clear TX frame sent event. */
-      dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
       data_ready = data_ready & 0x00; // Reset the last bit
                                       // Send data and wait
                                       //      if (cnt % cnt_print == 0) {
@@ -130,12 +140,24 @@ int main(void) {
 }
 
 // Function definition
-static void send_message(uint8 msg) {
+static void send_message(uint8_t * msg, uint8_t n) {
+ dwt_writetxdata(sizeof(uint8_t)*n, msg, 0); /* Zero offset in TX buffer. */
+  dwt_writetxfctrl(sizeof(uint8_t)*n, 0, 0);     /* Zero offset in TX buffer, no ranging. */
+
+  dwt_starttx(DWT_START_TX_IMMEDIATE);
+
+  /* Poll DW1000 until TX frame sent event set. See NOTE 5 below.
+     * STATUS register is 5 bytes long but, as the event we are looking at is in the first byte of the register, we can use this simplest API
+     * function to access it.*/
+  while (!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS)) {
+  };
+  /* Clear TX frame sent event. */
+  dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
 }
 
 static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action) {
   nrf_gpio_pin_clear(PIN_DEBUG);
-  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN | pin ==CH1_PIN | pin ==CH2_PIN)) {
+  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN | pin ==CH1_PIN | pin ==CH2_PIN | pin ==CH3_PIN)) {
     switch (pin) {
     case CH0_PIN:
       ch = ch0;
@@ -176,4 +198,7 @@ static void print_msg(uint8 *msg, int n) {
   printf("]\r\n");
 }
 
+static void empty_timer_callback(nrf_timer_event_t event_type, void *p_context) {
+  printf("Timer reload Interrupt\r\n");
+}
 //    dc = (100 - (channel_get_t1(ch) - channel_get_t2(ch)) * PWM_IN_FREQ / 1e6 * 100);

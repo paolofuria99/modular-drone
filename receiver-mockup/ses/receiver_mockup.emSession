@@ -1,7 +1,9 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="146" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="main.c" useHWbreakpoint="false"/>
+ </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
   <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
@@ -49,6 +51,7 @@
   <Watches active="1" update="Never">
    <Watchpoint numelements="0" expression="T" evalMode="0" name="T" radix="16" linenumber="0" filename="../ses" list=""/>
    <Watchpoint numelements="1" expression="seq_values" evalMode="2" name="seq_values" radix="-1" linenumber="0" filename="../ses" list=""/>
+   <Watchpoint numelements="127" expression="rx_buffer" evalMode="2" name="rx_buffer" radix="-1" linenumber="0" filename="../ses" list=""/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -61,7 +64,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="122" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="107" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="173" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="158" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
