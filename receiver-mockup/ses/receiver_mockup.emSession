@@ -64,7 +64,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="173" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="158" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="43" y="43" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="26" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

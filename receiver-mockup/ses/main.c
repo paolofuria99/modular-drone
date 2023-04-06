@@ -46,7 +46,7 @@ nrf_pwm_sequence_t const seq =
         .end_delay = 0};
 
 
-#define RECEIVER_ADDR 0xC5
+#define RECEIVER_ADDR 0xC7
 // Define the IO
 #define FRAME_LEN_MAX 127
 #define CH 8
@@ -140,7 +140,7 @@ int main(void) {
       for (int i = 0; i < FRAME_LEN_MAX; i++) {
         if (rx_buffer[i] == RECEIVER_ADDR) {
           seq_values->channel_0 = (100 - rx_buffer[i + 1]) * 2500 / 100;
-          printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i + 1]);
+//          printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i + 1]);
           //          nrf_gpio_pin_toggle(PIN_DEBUG);
           break;
         }
