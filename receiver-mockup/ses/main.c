@@ -130,7 +130,7 @@ int main(void) {
   nrf_drv_pwm_init(&m_pwm0, &config, NULL);
   nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);  
 
-  nrf_gpio_pin_set(PIN_DEBUG);
+//  nrf_gpio_pin_set(PIN_DEBUG);
   //    printf("Configured");
 
   // Wait indefinitely
@@ -150,13 +150,12 @@ int main(void) {
 
 
 uint16_t wait_reception(){
-    nrf_gpio_pin_clear(PIN_DEBUG);
     for (int i = 0; i < FRAME_LEN_MAX; i++) {
       rx_buffer[i] = 0;
     }
     /* Activate reception immediately. */
     dwt_rxenable(DWT_START_RX_IMMEDIATE);
-//    nrf_gpio_pin_clear(PIN_DEBUG);
+
     /* Poll until a frame is properly received or an error/timeout occurs. */
     while (!((status_reg = dwt_read32bitreg(SYS_STATUS_ID)) & (SYS_STATUS_RXFCG | SYS_STATUS_ALL_RX_ERR))) {
     };
@@ -175,9 +174,6 @@ uint16_t wait_reception(){
       dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_ALL_RX_ERR);
     }
     
-    if(status_reg & SYS_STATUS_RXFCG){
-      nrf_gpio_pin_set(PIN_DEBUG);
-    }
     return (status_reg & SYS_STATUS_RXFCG);
 }
 

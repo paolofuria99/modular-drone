@@ -96,4 +96,4 @@ static channel_t * channel_array_slice(channel_t * array, uint8_t i);
 
 
 /* ------------------------ Macros ------------------------------ */
-#define BITMASK_WHEN_READY mask_ready_1_channel
+#define BITMASK_WHEN_READY mask_ready_4_channel

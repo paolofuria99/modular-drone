@@ -167,8 +167,8 @@ static void send_message(uint8_t * msg, uint8_t n) {
 }
 
 static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action) {
-  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN)) {
-    nrf_gpio_pin_clear(PIN_DEBUG);
+  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN | pin == CH1_PIN | pin == CH2_PIN | pin == CH3_PIN)) {
+//    nrf_gpio_pin_clear(PIN_DEBUG);
     switch (pin) {
     case CH0_PIN:
       ch = ch0;
@@ -198,7 +198,7 @@ static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t actio
       //      printf("Interrupt High to Low -- %d\r\n", ch1_times.t1);
     }
   }
-  nrf_gpio_pin_set(PIN_DEBUG);
+//  nrf_gpio_pin_set(PIN_DEBUG);
 }
 
 static void print_msg(uint8 *msg, int n) {
