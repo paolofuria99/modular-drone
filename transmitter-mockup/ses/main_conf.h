@@ -64,6 +64,7 @@ channel_t *ch3;
 
 //// General ////
 float to_dc = PWM_IN_FREQ / 1e6 * 100; // Scaled to be used when the ton is expressed in us
+bool is_init = false;
 
 //// Transmission ////
 uint8_t tx_msg[tx_msg_n] = {ADDR_CH0, 0, ADDR_CH1, 0, ADDR_CH2, 0, ADDR_CH3, 0, 0, 0}; // Buffer to send
@@ -95,4 +96,4 @@ static channel_t * channel_array_slice(channel_t * array, uint8_t i);
 
 
 /* ------------------------ Macros ------------------------------ */
-#define BITMASK_WHEN_READY mask_ready_4_channel
+#define BITMASK_WHEN_READY mask_ready_1_channel

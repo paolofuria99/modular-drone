@@ -41,8 +41,8 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="3201" useTextEdit="1" useBinaryEdit="0" left="0" path="../config/sdk_config.h" selected="0" top="3324" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="1" y="72" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="3201" useTextEdit="1" useBinaryEdit="0" left="0" path="../config/sdk_config.h" selected="0" top="3176" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="72" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="43" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="75" useTextEdit="1" useBinaryEdit="0" left="0" path="receiver-module.emProject" selected="0" top="69" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="782" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/libraries/pwm/app_pwm.c" selected="0" top="761" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="219" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/libraries/pwm/app_pwm.h" selected="0" top="198" codecName="Default"/>

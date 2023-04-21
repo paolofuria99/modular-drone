@@ -2,7 +2,8 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="146" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="167" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="57" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="main.c" useHWbreakpoint="false"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
@@ -24,6 +25,7 @@
   <ProjectSessionItem path="receiver_mockup"/>
   <ProjectSessionItem path="receiver_mockup;receiver_mockup"/>
   <ProjectSessionItem path="receiver_mockup;receiver_mockup;Application"/>
+  <ProjectSessionItem path="receiver_mockup;receiver_mockup;Decadriver"/>
   <ProjectSessionItem path="receiver_mockup;receiver_mockup;Device"/>
   <ProjectSessionItem path="receiver_mockup;receiver_mockup;nRF_Drivers"/>
   <ProjectSessionItem path="receiver_mockup;receiver_mockup;nRF_Libraries"/>
@@ -52,6 +54,10 @@
    <Watchpoint numelements="0" expression="T" evalMode="0" name="T" radix="16" linenumber="0" filename="../ses" list=""/>
    <Watchpoint numelements="1" expression="seq_values" evalMode="2" name="seq_values" radix="-1" linenumber="0" filename="../ses" list=""/>
    <Watchpoint numelements="127" expression="rx_buffer" evalMode="2" name="rx_buffer" radix="-1" linenumber="0" filename="../ses" list=""/>
+   <Watchpoint numelements="0" expression="status_reg&amp;SYS_STATUS_RXFCG" evalMode="0" name="status_reg&amp;SYS_STATUS_RXFCG" radix="-1" linenumber="0" filename="" list=""/>
+   <Watchpoint numelements="0" expression="status_reg &amp; SYS_STATUS_RXFCG" evalMode="0" name="status_reg &amp; SYS_STATUS_RXFCG" radix="-1" linenumber="0" filename="" list=""/>
+   <Watchpoint numelements="0" expression="status_reg" evalMode="0" name="status_reg" radix="-1" linenumber="0" filename="" list=""/>
+   <Watchpoint numelements="0" expression="dt" evalMode="0" name="dt" radix="-1" linenumber="0" filename="" list=""/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -64,7 +70,11 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="43" y="43" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="26" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="44" y="140" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="115" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1644" useTextEdit="1" useBinaryEdit="0" left="0" path="../../deca_driver/deca_device_api.h" selected="0" top="1627" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1060" useTextEdit="1" useBinaryEdit="0" left="0" path="../../deca_driver/deca_device.c" selected="0" top="1041" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="110" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm/nrf_drv_pwm.h" selected="0" top="107" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="167" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/hal/nrf_pwm.h" selected="0" top="179" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

@@ -55,6 +55,7 @@
 // Srt this to the right amount of channel you want to read
 int main(void) {
   nrf_gpio_cfg_output(PIN_DEBUG);
+  nrf_gpio_pin_set(PIN_DEBUG);
 
   ch = channel_init_void();
   ch0 = channel_init_default(CH0_PIN, channel_0_ready, TIMER_CH0, gpiote_handler);
@@ -103,38 +104,48 @@ int main(void) {
   // -------------------- End DWM configuration ----------------------------- //
 
   // Send configuration signal
-  nrf_delay_ms(3000);
   uint8_t tx_conf[tx_conf_n] = {0xff, 0xc5, 0x66, 0xa2, 0xb5, 0, 0, 0};
-  
+  __disable_irq();
+  nrf_delay_ms(10000); // Wait before enabling the interrupts
+  __enable_irq();
+//  printf("Sent configuration message");
 
-  send_message(tx_conf, tx_conf_n);
- 
-  nrf_delay_ms(3000);
-  printf("Sent configuration message");
+//  printf("DWM configured\r\n");
 
-  printf("DWM configured\r\n");
-
-  printf("Running main loop \r\n");
+//  printf("Running main loop \r\n");
   uint32_t cnt = 0;
   uint8_t cnt_print = 40;
   while (1) {
+
     if (data_ready == BITMASK_WHEN_READY) {
+//    nrf_gpio_pin_clear(PIN_DEBUG);
+
+    if(!is_init){
+        send_message(tx_conf, tx_conf_n);
+        is_init = true;
+        data_ready = data_ready & 0x00; 
+//        nrf_gpio_pin_set(PIN_DEBUG);
+    }
+    else{
       for (int j = 1; j < NUMBER_OF_CHANNELS_ENABLED * 2; j += 2) {
         dc = channel_get_dc(all_channels[(j - 1) / 2]);
         tx_msg[j] = dc;
       }
       send_message(tx_msg, tx_msg_n);
+//      nrf_gpio_pin_set(PIN_DEBUG);
 
-      data_ready = data_ready & 0x00; // Reset the last bit
-                                      // Send data and wait
-                                      //      if (cnt % cnt_print == 0) {
-                                      //        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
-                                      //      }
-                                      //      cnt ++;
-      if(cnt%cnt_print == 0){
-        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
-        }
-      cnt ++;
+      data_ready = data_ready & 0x00; 
+      // Reset the last bit
+      // Send data and wait
+//      if (cnt % cnt_print == 0) {
+//        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+//       }
+//      cnt ++;
+//      if(cnt%cnt_print == 0){
+//        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+//        }
+//      cnt ++;
+    }
     }
   }
 }
@@ -156,8 +167,8 @@ static void send_message(uint8_t * msg, uint8_t n) {
 }
 
 static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action) {
-  nrf_gpio_pin_clear(PIN_DEBUG);
-  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN | pin ==CH1_PIN | pin ==CH2_PIN | pin ==CH3_PIN)) {
+  if (action == NRF_GPIOTE_POLARITY_TOGGLE && (pin == CH0_PIN)) {
+    nrf_gpio_pin_clear(PIN_DEBUG);
     switch (pin) {
     case CH0_PIN:
       ch = ch0;

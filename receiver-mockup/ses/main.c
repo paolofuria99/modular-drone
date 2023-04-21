@@ -19,7 +19,7 @@
 
 //-----------------dw1000----------------------------
 
-uint8_t wait_reception();
+uint16_t wait_reception();
 
 static dwt_config_t config = {
     5,               /* Channel number. */
@@ -46,7 +46,7 @@ nrf_pwm_sequence_t const seq =
         .end_delay = 0};
 
 
-#define RECEIVER_ADDR 0xC7
+#define RECEIVER_ADDR 0xC8
 // Define the IO
 #define FRAME_LEN_MAX 127
 #define CH 8
@@ -126,32 +126,31 @@ int main(void) {
   config.load_mode = NRF_PWM_LOAD_INDIVIDUAL,
   config.step_mode = NRF_PWM_STEP_AUTO,
   config.top_value = 2500;
+  seq_values->channel_0 = 100 | 0x8000;
   nrf_drv_pwm_init(&m_pwm0, &config, NULL);
-  //  seq_values->channel_0 = 2500 / 2;
-  nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);
-  seq_values->channel_0 = 1250;
+  nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);  
+
   nrf_gpio_pin_set(PIN_DEBUG);
   //    printf("Configured");
 
   // Wait indefinitely
-
   while (1) {
-   wait_reception();
+   if(wait_reception()){
       for (int i = 0; i < FRAME_LEN_MAX; i++) {
         if (rx_buffer[i] == RECEIVER_ADDR) {
-          seq_values->channel_0 = (100 - rx_buffer[i + 1]) * 2500 / 100;
+          seq_values->channel_0 = ((rx_buffer[i + 1]) * 2500 / 100) | 0x8000;
 //          printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i + 1]);
-          //          nrf_gpio_pin_toggle(PIN_DEBUG);
           break;
         }
       }
+    }
     }
 
 }
 
 
-uint8_t wait_reception(){
-    
+uint16_t wait_reception(){
+    nrf_gpio_pin_clear(PIN_DEBUG);
     for (int i = 0; i < FRAME_LEN_MAX; i++) {
       rx_buffer[i] = 0;
     }
@@ -175,8 +174,11 @@ uint8_t wait_reception(){
       /* Clear RX error events in the DW1000 status register. */
       dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_ALL_RX_ERR);
     }
-
-    return 0;
+    
+    if(status_reg & SYS_STATUS_RXFCG){
+      nrf_gpio_pin_set(PIN_DEBUG);
+    }
+    return (status_reg & SYS_STATUS_RXFCG);
 }
 
 
