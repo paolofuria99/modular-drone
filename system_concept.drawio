@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-04-27T20:00:38.114Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="DxcJIa9LZr_Nq0m8SGqe" version="21.2.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-27T20:01:24.077Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="VMNIgN6mgFlWj1ro5bBE" version="21.2.2" type="github">
   <diagram name="Pagina-1" id="vlm6lB6ihGMq4pOWuhoI">
     <mxGraphModel dx="1221" dy="668" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -13,7 +13,7 @@
         <mxCell id="P0oKsgv2b1vY-4PQph8e-3" value="" style="fillColor=#28A8E0;verticalLabelPosition=bottom;sketch=0;html=1;strokeColor=#ffffff;verticalAlign=top;align=center;points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];pointerEvents=1;shape=mxgraph.cisco_safe.compositeIcon;bgIcon=ellipse;resIcon=mxgraph.cisco_safe.capability.wireless_connection;rotation=90;" parent="1" vertex="1">
           <mxGeometry x="679" y="304" width="43" height="43" as="geometry" />
         </mxCell>
-        <mxCell id="P0oKsgv2b1vY-4PQph8e-4" value="Transmitter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-4" value="Transmitter Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="523" y="294" width="150" height="25" as="geometry" />
         </mxCell>
         <mxCell id="P0oKsgv2b1vY-4PQph8e-5" value="PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="P0oKsgv2b1vY-4PQph8e-7" target="P0oKsgv2b1vY-4PQph8e-4" edge="1">
