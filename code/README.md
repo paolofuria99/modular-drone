@@ -2,7 +2,7 @@
 
 ## General information
 Here there is the code for the [receiver](receiver/) and the [transmitter](transmitter/) modules that uses [DWM1001C](https://www.qorvo.com/products/p/DWM1001C) module which is a
-Ultra Wideband (UWB) and Bluetooth hardware based on DecaWave's DW1000 IC and Nordic Semiconductor [nrF52832](https://www.nordicsemi.com/Products/nRF52832) SoCultra-wideband (UWB) transceiver IC.
+Ultra Wideband (UWB) and Bluetooth hardware based on DecaWave's DW1000 IC and Nordic Semiconductor [nrF52832](https://www.nordicsemi.com/Products/nRF52832) SoC.
 
 The project was created with the IDE: [Segger Embedded Studio (SES)](https://www.segger.com/products/development-tools/embedded-studio/).\
 To install it:
