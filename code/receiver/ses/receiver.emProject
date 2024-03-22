@@ -1,6 +1,6 @@
 <!DOCTYPE CrossStudio_Project_File>
-<solution Name="transmitter_mockup" target="8" version="2">
-  <project Name="transmitter_mockup">
+<solution Name="receiver" target="8" version="2">
+  <project Name="receiver">
     <configuration
       Name="Common"
       arm_architecture="v7EM"
@@ -16,7 +16,7 @@
       arm_target_device_name="nRF52832_xxAA"
       arm_target_interface_type="SWD"
       c_preprocessor_definitions="BOARD_DW1001_DEV;BSP_DEFINES_ONLY;CONFIG_GPIO_AS_PINRESET;FLOAT_ABI_HARD;INITIALIZE_USER_SECTIONS;NO_VTOR_CONFIG;NRF52;NRF52832_XXAA;NRF52_PAN_74;"
-      c_user_include_directories="../config;../../../nRF5_SDK_14.2.0_17/;../../nRF5_SDK_14.2.0_17/components;../../nRF5_SDK_14.2.0_17/components/boards;../../nRF5_SDK_14.2.0_17/components/device;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/common;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/hal;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/nrf_soc_nosd;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/timer;../../nRF5_SDK_14.2.0_17/components/libraries/atomic;../../nRF5_SDK_14.2.0_17/components/libraries/balloc;../../nRF5_SDK_14.2.0_17/components/libraries/bsp;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_log;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_log/src;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_memobj;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_section_vars;../../nRF5_SDK_14.2.0_17/components/libraries/strerror;../../nRF5_SDK_14.2.0_17/components/libraries/util;../../nRF5_SDK_14.2.0_17/components/toolchain;../../nRF5_SDK_14.2.0_17/components/toolchain/cmsis/include;../../nRF5_SDK_14.2.0_17/boards;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/gpiote;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/uart;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/ppi;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/delay;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/spi_master;../../nRF5_SDK_14.2.0_17/components/libraries/uart;../../nRF5_SDK_14.2.0_17/components/libraries/fifo;../UART;../../deca_driver;../../deca_driver/port;"
+      c_user_include_directories="../config;../../../nRF5_SDK_14.2.0_17/;../../nRF5_SDK_14.2.0_17/components;../../nRF5_SDK_14.2.0_17/components/boards;../../nRF5_SDK_14.2.0_17/components/device;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/common;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/hal;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/nrf_soc_nosd;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/timer;../../nRF5_SDK_14.2.0_17/components/libraries/atomic;../../nRF5_SDK_14.2.0_17/components/libraries/balloc;../../nRF5_SDK_14.2.0_17/components/libraries/bsp;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_log;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_log/src;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_memobj;../../nRF5_SDK_14.2.0_17/components/libraries/experimental_section_vars;../../nRF5_SDK_14.2.0_17/components/libraries/strerror;../../nRF5_SDK_14.2.0_17/components/libraries/util;../../nRF5_SDK_14.2.0_17/components/toolchain;../../nRF5_SDK_14.2.0_17/components/toolchain/cmsis/include;../../nRF5_SDK_14.2.0_17/boards;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/gpiote;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/uart;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/ppi;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/delay;../../nRF5_SDK_14.2.0_17/components/drivers_nrf/spi_master;../../nRF5_SDK_14.2.0_17/components/libraries/uart;../../nRF5_SDK_14.2.0_17/components/libraries/fifo;../../nRF5_SDK_14.2.0_17/components/libraries/pwm;../UART;../../deca_driver;../../deca_driver/port;"
       debug_register_definition_file="../../nRF5_SDK_14.2.0_17/svd/nrf52.svd"
       debug_start_from_entry_point_symbol="No"
       debug_target_connection="J-Link"
@@ -52,6 +52,7 @@
       <file file_name="../../nRF5_SDK_14.2.0_17/external/fprintf/nrf_fprintf.c" />
       <file file_name="../../nRF5_SDK_14.2.0_17/external/fprintf/nrf_fprintf_format.c" />
       <file file_name="../../nRF5_SDK_14.2.0_17/components/libraries/uart/retarget.c" />
+      <file file_name="../../nRF5_SDK_14.2.0_17/components/libraries/pwm/app_pwm.c" />
     </folder>
     <folder Name="nRF_Drivers">
       <file file_name="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/common/nrf_drv_common.c" />
@@ -60,13 +61,11 @@
       <file file_name="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/uart/nrf_drv_uart.c" />
       <file file_name="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/ppi/nrf_drv_ppi.c" />
       <file file_name="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/spi_master/nrf_drv_spi.c" />
+      <file file_name="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm/nrf_drv_pwm.c" />
     </folder>
     <folder Name="Application">
       <file file_name="main.c" />
       <file file_name="../config/sdk_config.h" />
-      <file file_name="main_conf.h" />
-      <file file_name="channel_library.c" />
-      <file file_name="channel_library.h" />
     </folder>
     <folder Name="Device">
       <file file_name="../../nRF5_SDK_14.2.0_17/components/toolchain/ses/ses_nRF_Startup.s" />
@@ -79,7 +78,6 @@
       <file file_name="../../deca_driver/deca_device.c" />
       <file file_name="../../deca_driver/deca_params_init.c" />
     </folder>
-    <folder Name="CustomLibraries" />
   </project>
   <configuration
     Name="Release"

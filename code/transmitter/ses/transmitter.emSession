@@ -11,9 +11,9 @@
  <Memory3/>
  <Memory4/>
  <Project>
-  <ProjectSessionItem path="transmitter_mockup"/>
-  <ProjectSessionItem path="transmitter_mockup;transmitter_mockup"/>
-  <ProjectSessionItem path="transmitter_mockup;transmitter_mockup;Application"/>
+  <ProjectSessionItem path="transmitter"/>
+  <ProjectSessionItem path="transmitter;transmitter"/>
+  <ProjectSessionItem path="transmitter;transmitter;Application"/>
  </Project>
  <Register1/>
  <Register2/>
@@ -38,7 +38,6 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="2" useTextEdit="1" useBinaryEdit="0" left="0" path="transmitter_mockup.emProject" selected="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="147" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="0" top="132" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="13" useTextEdit="1" useBinaryEdit="0" left="0" path="main_conf.h" selected="1" top="0" codecName="Default"/>
  </Files>

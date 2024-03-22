@@ -19,14 +19,14 @@
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="receiver_mockup" radix="16" sizeText="" addressText=""/>
  </Memory4>
  <Project>
-  <ProjectSessionItem path="receiver_mockup"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup;Application"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup;Decadriver"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup;Device"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup;nRF_Drivers"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup;nRF_Libraries"/>
-  <ProjectSessionItem path="receiver_mockup;receiver_mockup;Segger Startup Files"/>
+  <ProjectSessionItem path="receiver"/>
+  <ProjectSessionItem path="receiver;receiver"/>
+  <ProjectSessionItem path="receiver;receiver;Application"/>
+  <ProjectSessionItem path="receiver;receiver;Decadriver"/>
+  <ProjectSessionItem path="receiver;receiver;Device"/>
+  <ProjectSessionItem path="receiver;receiver;nRF_Drivers"/>
+  <ProjectSessionItem path="receiver;receiver;nRF_Libraries"/>
+  <ProjectSessionItem path="receiver;receiver;Segger Startup Files"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="receiver_mockup" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -67,11 +67,11 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="15" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="15" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1644" useTextEdit="1" useBinaryEdit="0" left="0" path="../../deca_driver/deca_device_api.h" selected="0" top="1627" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1060" useTextEdit="1" useBinaryEdit="0" left="0" path="../../deca_driver/deca_device.c" selected="0" top="1041" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="110" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm/nrf_drv_pwm.h" selected="0" top="107" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="167" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/hal/nrf_pwm.h" selected="0" top="149" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="receiver_mockup" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="receiver" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
