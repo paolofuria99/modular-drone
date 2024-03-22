@@ -13,7 +13,7 @@
 #include "nrf_drv_timer.h"
 #include "nrf_uart.h"
 #include "port_platform.h"
-#include "uart.h"
+#include "UART.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -46,7 +46,12 @@ nrf_pwm_sequence_t const seq =
         .end_delay = 0};
 
 
-#define RECEIVER_ADDR 0xC8
+// Uncomment the right motor address
+//#define RECEIVER_ADDR 0xC5
+//#define RECEIVER_ADDR 0xC6
+#define RECEIVER_ADDR 0xC7
+//#define RECEIVER_ADDR 0xC8
+
 // Define the IO
 #define FRAME_LEN_MAX 127
 #define CH 8
@@ -130,8 +135,8 @@ int main(void) {
   nrf_drv_pwm_init(&m_pwm0, &config, NULL);
   nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);  
 
-//  nrf_gpio_pin_set(PIN_DEBUG);
-  //    printf("Configured");
+  //  nrf_gpio_pin_set(PIN_DEBUG);
+  //  printf("Configured");
 
   // Wait indefinitely
   while (1) {

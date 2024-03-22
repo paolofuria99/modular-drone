@@ -11,7 +11,7 @@
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
 #include "nrf_uart.h"
-#include "uart.h"
+#include "UART.h"
 #include "channel_library.h"
 #include <stdbool.h>
 #include <stdint.h>
