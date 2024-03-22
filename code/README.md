@@ -11,4 +11,24 @@ To install it:
   -  CMSIS 5 CMSIS-CORE Support Package (version 5.02)
   -  CMSIS-CORE Support Package (version 4.05)
   -  Nordic Semiconductor nRF CPU Support Package (version 1.06)
+ 
+The project is built as follow : 
+```
+code/
+├── deca_driver                   // DW1000 API software package 2.04
+├── nRF5_SDK_14.2.0               // Nordic Semiconductor SDK 14.2 for nrF52832
+├── receiver                      // SES project for the receiver modulus
+│   ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
+│   ├── ses                       
+|   │   ├── receiver.emProject    // Segger Embedded Studio project
+|   │   ├── main.c                // Initialization and main program
+│   ├── UART                      // Uart 
+├── transmitter                   // SES project for the trasmitter modulus
+│   ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
+│   ├── ses                       
+|   │   ├── transmitter.emProject // Segger Embedded Studio project
+|   │   ├── main.c                // Initialization and main program
+│   ├── UART                      // Uart 
+└── README.md
+```
 
