@@ -37,11 +37,15 @@ enum {mask_ready_1_channel = 0b00000001,
 #define ADDR_CH2 0xC7
 #define ADDR_CH3 0xC8
 
-#define CH0_PIN 12
-#define CH1_PIN 27
-#define CH2_PIN 13
-#define CH3_PIN 15
-#define PIN_DEBUG 8
+//#define CH0_PIN 12
+//#define CH1_PIN 27
+//#define CH2_PIN 13
+//#define CH3_PIN 15
+#define CH0_PIN 15
+#define CH1_PIN 8
+#define CH2_PIN 6
+#define CH3_PIN 7
+#define PIN_DEBUG 23
 #define PWM_IN_FREQ 400 // Signal frequency [Hz]
 
 #define tx_conf_n 30

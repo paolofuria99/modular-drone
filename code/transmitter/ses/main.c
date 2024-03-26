@@ -118,13 +118,13 @@ int main(void) {
   while (1) {
 
     if (data_ready == BITMASK_WHEN_READY) {
-//    nrf_gpio_pin_clear(PIN_DEBUG);
+    nrf_gpio_pin_clear(PIN_DEBUG);
 
     if(!is_init){
         send_message(tx_conf, tx_conf_n);
         is_init = true;
         data_ready = data_ready & 0x00; 
-//        nrf_gpio_pin_set(PIN_DEBUG);
+        nrf_gpio_pin_set(PIN_DEBUG);
     }
     else{
       for (int j = 1; j < NUMBER_OF_CHANNELS_ENABLED * 2; j += 2) {
@@ -132,7 +132,7 @@ int main(void) {
         tx_msg[j] = dc;
       }
       send_message(tx_msg, tx_msg_n);
-//      nrf_gpio_pin_set(PIN_DEBUG);
+      nrf_gpio_pin_set(PIN_DEBUG);
 
       data_ready = data_ready & 0x00; 
       // Reset the last bit
