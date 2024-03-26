@@ -11,7 +11,9 @@ To install it:
   -  CMSIS 5 CMSIS-CORE Support Package (version 5.02)
   -  CMSIS-CORE Support Package (version 4.05)
   -  Nordic Semiconductor nRF CPU Support Package (version 1.06)
- 
+
+More information on getting started with DWM1001-dev can be found in the [Firmware User Guide](../doc/DWM1001FirmwareUserGuide.pdf)
+
 The project is built as follow : 
 ```
 code/
