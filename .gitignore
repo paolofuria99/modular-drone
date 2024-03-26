@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 **/Output
 *.jlink
+*.s
 **/report
 **/PapersAndReports
