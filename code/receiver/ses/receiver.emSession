@@ -63,7 +63,7 @@
    <Watchpoint numelements="0" expression="status_reg &amp; SYS_STATUS_RXFCG" evalMode="0" name="status_reg &amp; SYS_STATUS_RXFCG" radix="-1" linenumber="0" filename="../ses" list=""/>
    <Watchpoint numelements="0" expression="status_reg" evalMode="0" name="status_reg" radix="-1" linenumber="0" filename="../ses" list=""/>
    <Watchpoint numelements="0" expression="dt" evalMode="0" name="dt" radix="-1" linenumber="0" filename="../ses" list=""/>
-   <Watchpoint numelements="0" expression="frame_len" evalMode="0" name="frame_len" radix="-1" linenumber="172" filename="main.c" list=""/>
+   <Watchpoint numelements="0" expression="frame_len" evalMode="0" name="frame_len" radix="-1" linenumber="173" filename="main.c" list=""/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -76,9 +76,10 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="158" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="153" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="147" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="86" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="599" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/device/nrf52.h" selected="0" top="582" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="177" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/hal/nrf_pwm.h" selected="0" top="160" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="447" useTextEdit="1" useBinaryEdit="0" left="0" path="../../nRF5_SDK_14.2.0_17/components/drivers_nrf/pwm/nrf_drv_pwm.h" selected="0" top="431" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="receiver" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/aless/projects/modular-drone/nRF5_SDK_14.2.0_17/components/libraries/pwm" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

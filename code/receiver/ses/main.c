@@ -145,6 +145,7 @@ int main(void) {
         if (rx_buffer[i] == RECEIVER_ADDR) {
           // Update the PWM Duty Cycle
           seq_values->channel_0 = ((rx_buffer[i + 1])* 2500 / 100) | 0x8000;
+          //nrf_drv_pwm_sequence_update(&m_pwm0,0,&seq);
           //printf("id: %d, duty %d\r\n", RECEIVER_ADDR, rx_buffer[i + 1]);
           break;
         }
