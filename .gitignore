@@ -4,3 +4,5 @@
 *.s
 **/report
 **/PapersAndReports
+**/PX4-Autopilot
+*.AppImage

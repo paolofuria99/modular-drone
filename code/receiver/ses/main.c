@@ -41,7 +41,7 @@ static nrf_drv_pwm_t m_pwm0 = NRF_DRV_PWM_INSTANCE(0);
 
 // Define the IO, constants and variables
 #define FRAME_LEN_MAX 127
-#define CH 8                // PWM output pin connected to the ESC
+#define CH 15               // PWM output pin connected to the ESC
 #define PIN_DEBUG 23        // Debug PIN
 
 // Uncomment the right motor address
@@ -106,8 +106,15 @@ int main(void) {
   
   // Pin initialization
   nrf_gpio_cfg_output(CH);            // Initialize ESC pin as output
-  nrf_gpio_cfg_output(PIN_DEBUG);     // Initialise DEBUG pin as output 
-  nrf_gpio_pin_clear(PIN_DEBUG);      // Clear DEBUG pin
+  // nrf_gpio_cfg_output(PIN_DEBUG);     // Initialise DEBUG pin as output 
+  // nrf_gpio_pin_clear(PIN_DEBUG);     // Clear DEBUG pin
+
+  //  while(1){
+  //    nrf_gpio_pin_clear(PIN_DEBUG);      // Clear DEBUG pin
+  //    nrf_delay_ms(500);
+  //    nrf_gpio_pin_set(PIN_DEBUG);      // Clear DEBUG pin
+  //    nrf_delay_ms(500);
+  //  }
   
   // Scaled to be used when the ton is expressed in us
   uint32_t T = 1 / PWM_IN_FREQ * 1e6; 
@@ -135,12 +142,12 @@ int main(void) {
   nrf_drv_pwm_simple_playback(&m_pwm0, &seq, 1, NRF_DRV_PWM_FLAG_LOOP);  
 
   // nrf_gpio_pin_set(PIN_DEBUG);
-  //  printf("Configured");
+    //printf("Configured");
 
   // Wait indefinitely
   while (1) {
    if(wait_reception()){
-    nrf_gpio_pin_set(PIN_DEBUG);
+    // nrf_gpio_pin_set(PIN_DEBUG);
       for (int i = 0; i < FRAME_LEN_MAX; i++) {
         if (rx_buffer[i] == RECEIVER_ADDR) {
           // Update the PWM Duty Cycle

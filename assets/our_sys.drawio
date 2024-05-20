@@ -1,0 +1,139 @@
+<mxfile host="app.diagrams.net" modified="2023-04-21T09:57:42.866Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="o9cJZ9YGk0Z865IuZe9U" version="21.1.4" type="github">
+  <diagram name="Pagina-1" id="vlm6lB6ihGMq4pOWuhoI">
+    <mxGraphModel dx="1221" dy="668" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="468" y="133" width="255" height="201" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-2" value="Master Module" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510.5" y="103" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-3" value="" style="fillColor=#28A8E0;verticalLabelPosition=bottom;sketch=0;html=1;strokeColor=#ffffff;verticalAlign=top;align=center;points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];pointerEvents=1;shape=mxgraph.cisco_safe.compositeIcon;bgIcon=ellipse;resIcon=mxgraph.cisco_safe.capability.wireless_connection;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="679" y="304" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-4" value="Transmitter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="523" y="294" width="150" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-5" value="PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="P0oKsgv2b1vY-4PQph8e-7" target="P0oKsgv2b1vY-4PQph8e-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-6" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="518" y="154" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="P0oKsgv2b1vY-4PQph8e-6" vertex="1">
+          <mxGeometry y="30" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-8" value="Sensors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="P0oKsgv2b1vY-4PQph8e-6" vertex="1">
+          <mxGeometry x="80" y="45" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-9" value="Radio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="P0oKsgv2b1vY-4PQph8e-6" vertex="1">
+          <mxGeometry x="10" y="45" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-10" value="Flght Controller" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="P0oKsgv2b1vY-4PQph8e-6" vertex="1">
+          <mxGeometry x="20" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-11" value="Battery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;rotation=-90;" parent="1" vertex="1">
+          <mxGeometry x="-181.25" y="335.25" width="482.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-29" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="96" y="433" width="214" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-30" value="Module 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="118.75" y="403" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-32" value="Esc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="117.5" y="513" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-33" value="Motor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="117.5" y="538" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-34" value="PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="P0oKsgv2b1vY-4PQph8e-35" target="P0oKsgv2b1vY-4PQph8e-32" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-35" value="Receiver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;" parent="1" vertex="1">
+          <mxGeometry x="117.5" y="443" width="172.5" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-36" value="" style="fillColor=#28A8E0;verticalLabelPosition=bottom;sketch=0;html=1;strokeColor=#ffffff;verticalAlign=top;align=center;points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];pointerEvents=1;shape=mxgraph.cisco_safe.compositeIcon;bgIcon=ellipse;resIcon=mxgraph.cisco_safe.capability.wireless_connection;" parent="1" vertex="1">
+          <mxGeometry x="260" y="381" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="P0oKsgv2b1vY-4PQph8e-37" value="ADDR1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="235" y="447" width="47.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="334" y="435" width="214" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-5" value="Module 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="356.75" y="405" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-6" value="Esc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="355.5" y="515" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-7" value="Motor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="355.5" y="540" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-8" value="PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4sx63ZYHNkQ9I55h2DVH-9" target="4sx63ZYHNkQ9I55h2DVH-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-9" value="Receiver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;" parent="1" vertex="1">
+          <mxGeometry x="355.5" y="445" width="172.5" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-10" value="" style="fillColor=#28A8E0;verticalLabelPosition=bottom;sketch=0;html=1;strokeColor=#ffffff;verticalAlign=top;align=center;points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];pointerEvents=1;shape=mxgraph.cisco_safe.compositeIcon;bgIcon=ellipse;resIcon=mxgraph.cisco_safe.capability.wireless_connection;" parent="1" vertex="1">
+          <mxGeometry x="498" y="383" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-11" value="ADDR2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="473" y="449" width="47.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-12" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="578" y="435" width="214" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-13" value="Module 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="600.75" y="405" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-14" value="Esc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="599.5" y="515" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-15" value="Motor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="599.5" y="540" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-16" value="PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4sx63ZYHNkQ9I55h2DVH-17" target="4sx63ZYHNkQ9I55h2DVH-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-17" value="Receiver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;" parent="1" vertex="1">
+          <mxGeometry x="599.5" y="445" width="172.5" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-18" value="" style="fillColor=#28A8E0;verticalLabelPosition=bottom;sketch=0;html=1;strokeColor=#ffffff;verticalAlign=top;align=center;points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];pointerEvents=1;shape=mxgraph.cisco_safe.compositeIcon;bgIcon=ellipse;resIcon=mxgraph.cisco_safe.capability.wireless_connection;" parent="1" vertex="1">
+          <mxGeometry x="742" y="383" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-19" value="ADDR3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="717" y="449" width="47.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-20" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="824" y="435" width="214" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-21" value="Module 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="846.75" y="405" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-22" value="Esc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="845.5" y="515" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-23" value="Motor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="845.5" y="540" width="172.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-24" value="PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4sx63ZYHNkQ9I55h2DVH-25" target="4sx63ZYHNkQ9I55h2DVH-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-25" value="Receiver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;" parent="1" vertex="1">
+          <mxGeometry x="845.5" y="445" width="172.5" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-26" value="" style="fillColor=#28A8E0;verticalLabelPosition=bottom;sketch=0;html=1;strokeColor=#ffffff;verticalAlign=top;align=center;points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];pointerEvents=1;shape=mxgraph.cisco_safe.compositeIcon;bgIcon=ellipse;resIcon=mxgraph.cisco_safe.capability.wireless_connection;" parent="1" vertex="1">
+          <mxGeometry x="988" y="383" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="4sx63ZYHNkQ9I55h2DVH-27" value="ADDR4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="963" y="449" width="47.5" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

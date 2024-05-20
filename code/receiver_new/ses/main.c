@@ -37,14 +37,14 @@ static dwt_config_t config = {
 };
 
 // Uncomment the right motor address
-//#define RECEIVER_ADDR 0xC5
+#define RECEIVER_ADDR 0xC5
 //#define RECEIVER_ADDR 0xC6
-#define RECEIVER_ADDR 0xC7
+//#define RECEIVER_ADDR 0xC7
 //#define RECEIVER_ADDR 0xC8
 
 // Define the IO
 #define FRAME_LEN_MAX 127
-#define CH 8          // Output PWM pin connected to the ESC
+#define CH 15          // Output PWM pin connected to the ESC
 #define PIN_DEBUG 23  // Debug PIN
 
 // PWM Configuration in Hz

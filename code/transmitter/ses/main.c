@@ -36,8 +36,8 @@ int main(void) {
 
   // Initialize UART
   boUART_Init();
-  printf("Transmitter Module \r\n");
-  printf("UART SET \r\n");
+  //printf("Transmitter Module \r\n");
+  //printf("UART SET \r\n");
   
   // Initialize DWM
   nrf_gpio_cfg_input(DW1000_IRQ, NRF_GPIO_PIN_NOPULL); //Setup DW1000 IRQ pin
@@ -57,7 +57,7 @@ int main(void) {
   nrf_delay_ms(10000); // Wait before enabling the interrupts
   __enable_irq();
 
-//  printf("Sent configuration message");
+  printf("Sent configuration message");
 //  printf("DWM configured\r\n");
 //  printf("Running main loop \r\n");
 
@@ -86,14 +86,11 @@ int main(void) {
         data_ready = data_ready & 0x00; 
         // Reset the last bit
         // Send data and wait
-  //      if (cnt % cnt_print == 0) {
-  //        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
-  //       }
-  //      cnt ++;
-  //      if(cnt%cnt_print == 0){
-  //        print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
-  //        }
-  //      cnt ++;
+//        if (cnt % cnt_print == 0) {
+//          print_msg(tx_msg, NUMBER_OF_CHANNELS_ENABLED * 2);
+//         }
+//        cnt ++;
+
       }
     }
   }
@@ -132,7 +129,7 @@ static void gpiote_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t actio
       ch = ch3;
       break;
     default:
-      printf("Wrong Channel\r\n");
+      // printf("Wrong Channel\r\n");
       exit(EXIT_FAILURE);
     }
     if (nrf_gpio_pin_read(channel_get_pin(ch))) {
